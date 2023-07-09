@@ -8,8 +8,8 @@
 /*
 required files
 */
-import express from 'express';
 import 'babel-polyfill';
+import express from 'express';
 import cors from 'cors';
 const swagger = require('./app/config/swagger');
 import usersRoute from './app/routes/userRoute';

@@ -26,6 +26,15 @@ const createUserTable = () => {
 };
 
 /**
+ * Create user Accounts Table
+ */
+const userAccountsTable = () => {
+  const userAccountQuery = Constants.ACCOUNTS_TABLE_CREATION;
+
+  return pool.query(userAccountQuery);
+};
+
+/**
  * Create user conversation Table
  */
 const userPostTable = () => {
@@ -69,6 +78,7 @@ const createAllTables = async () => {
   try {
     // Execute table creation functions sequentially
     await createUserTable();
+    await userAccountsTable();
     await userPostTable();
     await userLikesTable();
     await userCommentsTable();

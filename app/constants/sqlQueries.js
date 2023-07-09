@@ -18,9 +18,23 @@ export class Constants {
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     password VARCHAR(100) NOT NULL,
-    created_on DATE NOT NULL,
-    update_at DATE NOT NULL,
+    created_on TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
     verification BOOLEAN DEFAULT false)`;
+
+  static ACCOUNTS_TABLE_CREATION = `CREATE TABLE IF NOT EXISTS accounts (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users (id),
+      account_type VARCHAR(20),
+      bio TEXT,
+      mobile VARCHAR(15),
+      profile_image_url VARCHAR(255),
+      dob DATE,
+      gender VARCHAR(10),
+      links TEXT[],
+      created_on TIMESTAMP NOT NULL,
+      updated_at TIMESTAMP NOT NULL
+    )`;
 
   /**
    * conversations: This table represents individual conversations between users. It includes columns for id (unique identifier), name (optional name for the conversation), and created_at (timestamp of conversation creation).
@@ -65,7 +79,7 @@ export class Constants {
   // Drop Table
   static DROP_TABLE = 'DROP TABLE IF EXISTS users'
   static REGISTER_QUERY = `INSERT INTO
-      users(email, username, first_name, last_name, password, created_on, update_at)
+      users(email, username, first_name, last_name, password, created_on, updated_at)
       VALUES($1, $2, $3, $4, $5, $6, $7)
       RETURNING *`;
   static LOGIN_QUERY = 'SELECT * FROM users WHERE email = $1 AND verification = true';
@@ -82,4 +96,8 @@ export class Constants {
   static GET_SPECIFIC_CONVERSATION = `SELECT * FROM conversations WHERE id = $1`;
   static UPDATE_CONVERSATION = `UPDATE conversations SET name = $1 WHERE id = $2 RETURNING *`
   static DELETE_CONVERSATION = `DELETE FROM conversations WHERE id = $1`;
+
+  // Accounts
+  static USER_PROFILE_CREATE = `INSERT INTO accounts (user_id, account_type, bio, mobile, profile_image_url, dob, gender, links, created_on, updated_at)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`;
 }

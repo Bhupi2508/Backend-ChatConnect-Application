@@ -1,0 +1,74 @@
+{
+    "Register Users": [
+        {
+            "email": "john@example.com",
+            "username": "john_doe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "password": "pass123"
+        },
+        {
+            "email": "emma@example.com",
+            "username": "emma_01",
+            "first_name": "Emma",
+            "last_name": "Smith",
+            "password": "secret456"
+        },
+        {
+            "email": "alex@example.com",
+            "username": "alex_23",
+            "first_name": "Alex",
+            "last_name": "Johnson",
+            "password": "password789"
+        },
+        {
+            "email": "sarah@example.com",
+            "username": "sarah34",
+            "first_name": "Sarah",
+            "last_name": "Taylor",
+            "password": "sarahpass"
+        },
+        {
+            "email": "jennifer@example.com",
+            "username": "jennifer89",
+            "first_name": "Jennifer",
+            "last_name": "Brown",
+            "password": "jenny123"
+        },
+        {
+            "email": "michael@example.com",
+            "username": "mike123",
+            "first_name": "Michael",
+            "last_name": "Johnson",
+            "password": "mikepass"
+        },
+        {
+            "email": "laura@example.com",
+            "username": "laura_x",
+            "first_name": "Laura",
+            "last_name": "Davis",
+            "password": "laura456"
+        },
+        {
+            "email": "robert@example.com",
+            "username": "robert78",
+            "first_name": "Robert",
+            "last_name": "Wilson",
+            "password": "robertpass"
+        },
+        {
+            "email": "samantha@example.com",
+            "username": "sam_123",
+            "first_name": "Samantha",
+            "last_name": "Anderson",
+            "password": "sammy789"
+        },
+        {
+            "email": "ryan@example.com",
+            "username": "ryan12",
+            "first_name": "Ryan",
+            "last_name": "Wilson",
+            "password": "ryanpass"
+        }
+    ]
+}

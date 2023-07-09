@@ -24,4 +24,5 @@ export default {
     HOST: process.env.HOST,
     ADDRESS: process.env.ADDRESS,
     MAIL_PORT: process.env.MAIL_PORT,
+    SERVER_URL: process.env.SERVER_URL || 'http://localhost',
 }

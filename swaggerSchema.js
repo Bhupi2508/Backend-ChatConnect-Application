@@ -1,6 +1,6 @@
 const ssoLoginSchema = {
     createUser: {
-        path: '/signUp',
+        path: '/v1/register',
         method: 'post',
         summary: 'Create user',
         description: 'Create a new user account',
@@ -70,10 +70,11 @@ const ssoLoginSchema = {
                     }
                 }
             }
-        }
+        },
+        tags: ['User Management']
     },
     siginUser: {
-        path: '/login',
+        path: '/v1/login',
         method: 'post',
         summary: 'Login user',
         description: 'Authenticate user and generate token',
@@ -131,9 +132,10 @@ const ssoLoginSchema = {
             },
             // Define other possible response codes and descriptions here
         },
+        tags: ['User Management']
     },
     getAllUser: {
-        path: '/fetch-all-users',
+        path: '/v1/fetch-all-users',
         method: 'get',
         summary: 'Fetch all users',
         description: 'Retrieve all registered users',
@@ -169,9 +171,10 @@ const ssoLoginSchema = {
             },
             // Define other possible response codes and descriptions here
         },
+        tags: ['User Management']
     },
     deleteUser: {
-        path: '/delete',
+        path: '/v1/delete',
         method: 'post',
         summary: 'Delete user',
         description: 'Delete an existing user',
@@ -261,13 +264,25 @@ const ssoLoginSchema = {
                     }
                 }
             }
-        }
+        },
+        tags: ['User Management']
     },
     ssoLogin: {
-        path: '/sso-login',
+        path: '/v1/sso-login',
         method: 'post',
         summary: 'Login with token',
         description: 'Authenticate user with token',
+        parameters: [
+            {
+                name: 'token',
+                in: 'query',
+                description: 'Token value',
+                schema: {
+                    type: 'string'
+                },
+                required: true
+            }
+        ],
         requestBody: {
             content: {
                 'application/json': {
@@ -342,6 +357,187 @@ const ssoLoginSchema = {
             },
             // Rest of the responses...
         },
+        tags: ['User Management']
+    },
+    forgotPassword: {
+        path: '/v1/forgotPassword',
+        method: 'post',
+        summary: 'Forgot password',
+        description: 'Forgot password',
+        requestBody: {
+            content: {
+                'application/json': {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            email: {
+                                type: 'string',
+                                description: 'User email',
+                            }
+                        },
+                        required: ['email'],
+                    },
+                },
+            },
+        },
+        responses: {
+            '200': {
+                description: 'Success',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        status: {
+                                            type: 'string',
+                                            description: 'Status fail or success',
+                                        },
+                                        message: {
+                                            type: 'string',
+                                            description: 'Message',
+                                        },
+                                        data: {
+                                            type: 'object',
+                                            properties: {
+                                                email: {
+                                                    type: 'string',
+                                                    description: 'Users email id',
+                                                },
+                                                username: {
+                                                    type: 'string',
+                                                    description: 'Username',
+                                                },
+                                                token: {
+                                                    type: 'string',
+                                                    description: 'Unique token',
+                                                }
+                                            }
+                                        }
+                                    },
+                                },
+                            },
+                        },
+                        example: {
+                            data: {
+                                status: "success",
+                                message: "we've sent password reset instructions to the primary email address on the account",
+                                data: {
+                                    email: "Bhupi@abc.com",
+                                    username: "Bhupi123",
+                                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkJodXBpQGFiYy5jb20iLCJ1c2VyX2lkIjoxMiwiZmlyc3RfbmFtZSI6IkJodXBpIiwibGFzdF9uYW1lIjoiU2lyIiwidXNlcm5hbWUiOiJCaHVwaTEyMyIsImlhdCI6MTY4NzE3NDQ4NCwiZXhwIjoxNjg3NDMzNjg0fQ.dyjULa2_hfo4XFmkDp4x7lTZZRjVX32B1RZwXqxFG4o"
+                                }
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        tags: ['User Management']
+    },
+    resetPassword: {
+        path: '/v1/resetPassword',
+        method: 'post',
+        summary: 'Forgot password',
+        description: 'Forgot password',
+        parameters: [
+            {
+                name: 'token',
+                in: 'query',
+                description: 'Token value',
+                schema: {
+                    type: 'string'
+                },
+                required: true
+            }
+        ],
+        requestBody: {
+            content: {
+                'application/json': {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            email: {
+                                type: 'string',
+                                description: 'User email',
+                            },
+                            password: {
+                                type: 'string',
+                                description: 'User old password',
+                            },
+                            confirmPassword: {
+                                type: 'string',
+                                description: 'User new password',
+                            }
+                        },
+                        required: ['email', 'password', 'confirmPassword'],
+                    },
+                },
+            },
+        },
+        responses: {
+            '200': {
+                description: 'Success',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                data: {
+                                    type: 'object',
+                                    properties: {
+                                        status: {
+                                            type: 'string',
+                                            description: 'Status fail or success',
+                                        },
+                                        message: {
+                                            type: 'string',
+                                            description: 'Message',
+                                        }
+                                    },
+                                },
+                            },
+                        },
+                        example: {
+                            data: {
+                                status: "success",
+                                message: "Password reset successfully!",
+                            },
+                        },
+                    },
+                },
+            },
+            '400': {
+                description: 'Bad Request',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                error: { type: 'string' }
+                            }
+                        }
+                    }
+                }
+            },
+            '500': {
+                description: 'Internal Server Error',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                status: { type: 'string' },
+                                error: { type: 'string' }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        tags: ['User Management']
     }
 };
 
